@@ -1,3 +1,1 @@
-# ib-makarovA
-ya tavo kusal
-dab dab yaa
+Выполненные лаборатораные работы 4-8 с сайта http://cs.mipt.ru/
