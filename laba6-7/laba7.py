@@ -7,6 +7,12 @@ pygame.init()
 pygame.display.set_caption('Пау-пиу')
 FPS = 60
 screen = pygame.display.set_mode((1280, 720))
+score = 0
+desired_score = 60  # количество очков для победы
+game_duration = 50  # время для возможности играть
+
+start_time = pygame.time.get_ticks()  # запуск времени
+elapsed_time = 0
 
 x = randint(100, 700)
 y = randint(100, 500)
@@ -62,6 +68,14 @@ def score(sum):
     font = pygame.font.Font(None, 25)
     text = font.render('Твой счет: ' + str(sum), 1, (255, 255, 255))
     screen.blit(text, (1100, 10))
+
+
+def timer():
+    font = pygame.font.Font(None, 25)
+    time_elapsed = pygame.time.get_ticks() - start_time
+    seconds = (game_duration * 1000 - time_elapsed) // 1000
+    text = font.render('Оставшееся время: ' + str(seconds), 1, (255, 255, 255))
+    screen.blit(text, (10, 10))
 
 
 clock = pygame.time.Clock()
@@ -136,11 +150,22 @@ while not finished:
                     sum += 3
                     print('счет ', sum)
                     click = True
+        if sum >= desired_score:
+            finished = True
+
+        elapsed_time = (pygame.time.get_ticks() - start_time) // 1000
+        if elapsed_time >= game_duration:
+            finished = True
+
+        timer()  # обновляет время на дисплее
+
         pygame.display.update()
         screen.fill(BLACK)
+print('Игра завершена! Твой итоговый счет:', sum)
 pygame.quit()
 toplist = []
-print('Введите свой ник пжпжпж')
+print('Введите свой ник пжпжпж:'
+      '')
 nick = input()
 f = open(r'C:\Users\skmemes\ib-makarovA\best_players.txt', 'r')
 for line in f:
